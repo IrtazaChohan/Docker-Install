@@ -1,0 +1,30 @@
+#This is in installation method for installing Docker - this is for installing on Ubuntu (hence using apt-get)
+
+#"rkt" is an alternative (so is containerd) to Docker however for this script we will install Docker
+
+# Run these commands on Kubernetes master and worker nodes
+# First add the GPG key to the docker respository - we basically use curl to download and use apt add (as this is Ubuntu we are doing this on) to add the key
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+#Once the above completes then add the Docker apt_repository (getting latest stable release)
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+# As we have added in a new repository we now have to do a apt-get update (basically update our local listing)
+
+sudo apt-get update
+
+
+# Now we can install Docker! (we are using the community edition and a specific version of "18.06.1~ce~3-0~ubuntu" across master and other worker nodes)
+sudo apt-get install -y docker-ce=18.06.1~ce~3-0~ubuntu
+
+#Last step is to make sure Docker does not update automatically! We put a hold on that package - although we probably will have outbound access disabled anyway so it can't update.
+sudo apt-mark hold docker-ce
+
+#Make sure you are running the correct version
+sudo docker version
+
