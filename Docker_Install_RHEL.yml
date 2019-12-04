@@ -1,0 +1,25 @@
+# Below shows how to install Docker on RHEL (the commands below have been tested on RHEL 7 and 8.) You can find screenshots of successful installation on my website: https://lostintheclouds.net/docker-installation-on-rhel/
+
+# First check the version your running in RHEL - either the first command or uname
+
+cat /etc/redhat-release
+uname -a
+
+# Install the prerequisites:
+
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+# Add repo to install the version of docker to be used
+
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+# Check the repo to ensure it exists
+
+sudo yum repolist -v
+
+# Now do the installation:
+
+sudo yum install docker-ce
+
+
+
