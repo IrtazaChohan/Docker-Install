@@ -19,7 +19,11 @@ sudo yum repolist -v
 
 # Now do the installation:
 
-sudo yum install docker-ce
+sudo yum install docker-ce --nobest
+
+# Start the Docker deamon
+
+sudo systemctl start docker
 
 
 
